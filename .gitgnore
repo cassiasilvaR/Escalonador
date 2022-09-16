@@ -1,2 +1,3 @@
 #ignore all .h.gch
 *.h.gch
+.vscode/
