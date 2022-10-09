@@ -4,5 +4,6 @@
 
 typedef struct cell {
     int c_pid; //PID do processo atual ou processo inicial/final
-    process *c_process; //Endereço do pocesso
+    int t_exec; //Tempo restante de execução
+    struct cell *next_p; //Endereço do próximo da fila
 } cell;
