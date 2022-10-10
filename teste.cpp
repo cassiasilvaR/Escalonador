@@ -6,7 +6,6 @@
 void insere_processo(process p1, process* &l_process);
 void insere_fila(process p, process* &ini_fila, process* &fim_fila);
 void exec_filas(process* &ini_fila, process* &fim_fila, int quantum); //Executa os processos de uma fila
-void exibe_filas(process* &ini_fila);
 
 
 /*********** Declaração de variáveis globais ***************/
@@ -145,7 +144,7 @@ void exec_filas(process* &ini_fila, process* &fim_fila, int quantum)
 
 	//novo = ini_fila;
 
-    for(novo = ini_fila; novo != NULL; novo = novo->next_p)
+    for(novo = ini_fila; novo != NULL; novi = novo->next_p)
     {   
        novo->t_exec -= quantum;
        sleep(quantum);
@@ -160,33 +159,17 @@ void exec_filas(process* &ini_fila, process* &fim_fila, int quantum)
        {    
             //p = &novo;
             if(quantum == 1)
-                insere_fila(novo, i_f0, f_f0);
-            else if(quantum == 2)
                 insere_fila(novo, i_f1, f_f1);
-            else if(quantum == 4)
+            else if(quantum == 2)
                 insere_fila(novo, i_f2, f_f2);
+            else if(quantum == 4)
+                insere_fila(novo, i_f3, f_f3);
             else 
                 insere_fila(novo, i_f3, f_f3);
        }
     }
 
-    //Exibindo o conteúdo da fila após a execução
-
-    exibe_filas(ini_fila);
-
 	if (ini_fila == NULL)
 		fim_fila = NULL;
 	
-}
-
-void exibe_filas(process* &inicio)
-{
-    if(inicio == NULL)
-        printf("Fila vazia \n")
-    else 
-    {
-        process *fila;
-        for(fila = inicio; fila != NULL; fila = fila->next_p)
-            printf("%d %d %d %d\n", fila->pid, fila->fila, fila->status, fila->t_exec);
-    }
 }
